@@ -1,7 +1,7 @@
 ﻿import java.io.*;
 import java.util.*;
 
-public class Solution {
+public class Main {
 	/*
 	* Дано: n - число элементов в строке
 	*		s - строка
@@ -20,8 +20,29 @@ public class Solution {
   	*    \/\/
 	*/
 
-    static int func1(int n, String s) {
-     
+    static int func1(String s) {
+        char[] array = s.toCharArray();
+
+        int steps = 0;
+        int count = 0;
+
+        for (int i = 0; i < array.length; i++)
+        {
+            int prev = steps;
+            if (array[i] == 'D')
+            {
+                steps--;
+            }
+            else
+            {
+                steps++;
+            }
+            if (steps == 0 & prev == -1)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -29,12 +50,9 @@ public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("out.txt")); //System.getenv("OUTPUT_PATH")
 
-        int n = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
         String s = scanner.nextLine();
 
-        int result = func1(n, s);
+        int result = func1(s);
 
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
